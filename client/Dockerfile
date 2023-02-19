@@ -1,17 +1,15 @@
-FROM node:latest AS node
+FROM node:17-slim AS build
 
 WORKDIR /app
 COPY package.json package-lock.json ./
 
 # Install dependencies and copy them to the container
-COPY . .
 
 RUN npm install
+COPY . .
 # Build the Angular application for production
 RUN npm run build --prod
 
-
 # Configure the nginx web server
 FROM nginx:alpine
-COPY --from=node /app/dist/client /usr/share/nginx/html
-
+COPY --from=build /app/dist/client /usr/share/nginx/html
