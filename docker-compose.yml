@@ -5,7 +5,7 @@ services:
  client: 
   build: client # specify the directory of the Dockerfile
   ports:
-  - "4200:4200" # specify port mapping #specify ports mapping
+  - "4200:80" # specify port mapping #specify ports mapping
 
  server: # name of the first service
   build: server # specify the directory of the Dockerfile
