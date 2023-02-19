@@ -1,4 +1,4 @@
-FROM node:17-slim AS node
+FROM node:latest AS node
 
 WORKDIR /app
 COPY package.json package-lock.json ./
@@ -12,5 +12,6 @@ RUN npm run build --prod
 
 
 # Configure the nginx web server
-FROM nginx:1.17.1-alpine
+FROM nginx:alpine
 COPY --from=node /app/dist/client /usr/share/nginx/html
+
